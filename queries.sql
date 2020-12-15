@@ -41,3 +41,17 @@ FROM disneyplus
 INNER JOIN imdb
 ON disneyplus.imdb_id = imdb.imdb_id
 WHERE disneyplus.title LIKE '%sode%';
+
+--Looking at the biggest rating difference between US and non-US viewers
+
+SELECT disneyplus.imdb_id
+,disneyplus.title
+,disneyplus.imdb_rating
+,disneyplus.imdb_votes
+,imdb.us_voters_rating
+,imdb.non_us_voters_rating
+,imdb.us_voters_rating - imdb.non_us_voters_rating as Difference
+FROM disneyplus
+INNER JOIN imdb
+ON disneyplus.imdb_id = imdb.imdb_id
+ORDER BY Difference DESC;
